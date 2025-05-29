@@ -28,7 +28,7 @@ public class PayrollController {
     private PayslipRepository payslipRepository;
 
     @PostMapping("/generate/{month}/{year}")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('EMPLOYEE')")
     public ResponseEntity<ApiResponse> generatePayroll(@PathVariable Integer month, @PathVariable Integer year) {
         try {
             ApiResponse response = payrollService.generatePayroll(month, year);
@@ -52,7 +52,7 @@ public class PayrollController {
     }
 
     @GetMapping("/payslip/{month}/{year}")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('EMPLOYEE')")
     public ResponseEntity<ApiResponse> getAllPayslips(@PathVariable Integer month, @PathVariable Integer year) {
         List<Payslip> payslips = payslipRepository.findByMonthAndYear(month, year);
         if (payslips.isEmpty()) {

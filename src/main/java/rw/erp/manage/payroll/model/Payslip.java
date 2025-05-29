@@ -3,6 +3,7 @@ package rw.erp.manage.payroll.model;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import rw.erp.manage.payroll.enums.EPaymentStatus;
 
@@ -26,6 +27,7 @@ public class Payslip {
     private Double otherTaxedAmount;
     private Double grossSalary;
     private Double netSalary;
+    @Positive
     private Integer month;
     private Integer year;
 
